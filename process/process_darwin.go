@@ -274,8 +274,9 @@ func (p *Process) GroupsWithContext(ctx context.Context) ([]int32, error) {
 		return nil, err
 	}
 
-	groups := make([]int32, k.Eproc.Ucred.Ngroups)
-	for i := int16(0); i < k.Eproc.Ucred.Ngroups; i++ {
+	groups := make([]int32, len(k.Eproc.Ucred.Groups))
+	for i := 0; i < len(k.Eproc.Ucred.Groups); i++ {
+
 		groups[i] = int32(k.Eproc.Ucred.Groups[i])
 	}
 
